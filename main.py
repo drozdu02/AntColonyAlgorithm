@@ -35,7 +35,7 @@ class AntColonyAlgorithm:
         best_path = []
         all_paths = []
         for _ in range(self.num_of_ants):
-            start_node = list(self.points.keys()).index('G')
+            start_node = list(self.points.keys()).index(start_point)
             visited_nodes = [start_node]
             while len(visited_nodes) < self.num_of_points:
                 current_node = visited_nodes[-1]
@@ -105,15 +105,14 @@ class GeneratePlot(AntColonyAlgorithm):
 
 
 if __name__ == "__main__":
-    points = {
-        'A': (0, 0),
-        'B': (4, 7),
-        'C': (8, 13),
-        'D': (1, 8),
-        'E': (6, 4),
-        'F': (2, 10),
-        'G': (3, 3)
-    }
+    points = {}
+    num_points = int(input("Podaj liczbę punktów: "))
+    for i in range(num_points):
+        point_name = input(f"Podaj nazwę punktu {i + 1}: ")
+        x, y = eval(input(f"Podaj współrzędne (x, y) dla punktu {point_name}: "))
+        points[point_name] = (x, y)
+
+    start_point = input("Podaj nazwę punktu startowego: ")
 
     distance_matrix = np.zeros((len(points), len(points)))
     for i, (point1name, point1) in enumerate(points.items()):
